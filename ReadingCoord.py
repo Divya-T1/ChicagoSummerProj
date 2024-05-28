@@ -1,8 +1,6 @@
 import pandas as p
 #80 and 217
 #Long=x Lat=y
-#Hi
-print("Yay")
 class Map:
     def __init__(self):
         global x_list
