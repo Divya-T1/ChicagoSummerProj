@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('GroceryStore.csv')
 
 locations = list(df['Location'])
 #print (locations)
@@ -24,8 +24,8 @@ for point in locations:
 #print(ys)
 
 plt.plot(xs, ys, 'o')
-plt.xlim(min(xs), max(xs))
-plt.ylim(min(ys), max(ys))
+#plt.xlim(min(xs), max(xs)) 
+#plt.ylim(min(ys), max(ys))
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 plt.grid(True, which="both", ls="--")
