@@ -12,7 +12,7 @@ df = p.read_csv('GroceryStore.csv')
 df2 = p.read_csv("ChicagoSummerProj\\database\\Business_License.csv")
 #use nrows to limit number of rows
 
-sample=p.read_csv("C:\\Users\\venki\\VSCode\\Python\\ChicagoSummerProject\\ChicagoSummerProj\\database\\Business_License.csv", nrows=15)
+sample=p.read_csv(r"ChicagoSummerProj\database\Business_License.csv", nrows=15)
 
 
 #points=df.apply(point, axis=1)
@@ -25,7 +25,7 @@ df2["points2"]=df2.apply(lambda col: Point(col.LONGITUDE, col.LATITUDE), axis=1)
 mapPoints=gp.GeoDataFrame(df, geometry="points")
 mapPoints2=gp.GeoDataFrame(df2, geometry="points2")
 
-shapefile="C:\\Users\\venki\\VSCode\\Python\\ChicagoSummerProject\\ChicagoSummerProj"
+shapefile=r"ChicagoSummerProj\geo_export_2de1f329-0bd0-4922-a95b-6cc4d6a6d59e.shp"
 
 base=gp.read_file(shapefile)
 #sampleBase=base["the_geom"]
