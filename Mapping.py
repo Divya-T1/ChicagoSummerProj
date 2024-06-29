@@ -4,9 +4,16 @@ import pandas as p
 from shapely.geometry import Point
 import ReadingCoord
 import matplotlib.pyplot as plt
+import geodatasets
 
 df = p.read_csv('GroceryStore.csv') 
-df2= p.read_csv("C:\\Users\\venki\\VSCode\\Python\\ChicagoSummerProject\\ChicagoSummerProj\\database\\Business_License.csv")
+#put an r in front of the filepath so you don't have to do double backslashes
+#Ex: df2=p.read_csv(r'C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj\database\Business_License.csv')
+df2 = p.read_csv("ChicagoSummerProj\\database\\Business_License.csv")
+#use nrows to limit number of rows
+
+sample=p.read_csv("C:\\Users\\venki\\VSCode\\Python\\ChicagoSummerProject\\ChicagoSummerProj\\database\\Business_License.csv", nrows=15)
+
 
 #points=df.apply(point, axis=1)
 df['points'] = df['Location'].apply(loads)
@@ -20,6 +27,8 @@ mapPoints2=gp.GeoDataFrame(df2, geometry="points2")
 shapefile="C:\\Users\\venki\\VSCode\\Python\\ChicagoSummerProject\\ChicagoSummerProj"
 
 base=gp.read_file(shapefile)
+#sampleBase=base["the_geom"]
+
 
 fig, ax = plt.subplots(figsize=(10, 10))
 base.plot(ax=ax, color='grey')
@@ -29,8 +38,8 @@ mapPoints.crs={'init' : 'epsg:4326'}
 
 mapPoints2.crs={'init' : 'epsg:4326'}
 #print(mapPoints.head())
-mapPoints2.plot(ax=ax, color="RED", markersize=3)
-mapPoints.plot(ax=ax, color="Blue", markersize=3)
+mapPoints2.plot(ax=ax, color="RED", markersize=1)
+mapPoints.plot(ax=ax, color="Blue", markersize=10)
 
 plt.show()
 
