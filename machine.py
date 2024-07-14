@@ -47,7 +47,7 @@ Xdev = df2.drop(Xtr.index)
 Ytr = df.sample(frac=0.8, random_state=200)
 Ydev = df.drop(Ytr.index)
 
-model = NearestNeighbors()
+model = NearestNeighbors() 
 model.fit(Xtr, Ytr)
 # this does not work, WIP ^^^
 predictions = model.predict(Xdev)
