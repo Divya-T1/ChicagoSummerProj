@@ -65,6 +65,10 @@ listVal = []
 for x in range(len(census["COMMUNITY AREA NAME"])):
     listVal.append(0)
 
+listVal2 = []
+for x in range(len(census["COMMUNITY AREA NAME"])):
+    listVal2.append(0)
+
 listCE = []
 for x in range(len(census["COMMUNITY AREA NAME"])):
     listCE.append(0)
@@ -91,9 +95,10 @@ for x in range(len(census["COMMUNITY AREA NAME"])):
 
 #Businesses
 
-'''for community in root.iter("community"):
+'''value=0
+for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
-    geom=root[0][index[0]].find("the_geom").text
+    geom=root[0][value].find("the_geom").text
     count=0
     if(index==[]):
         listVal.append(0)
@@ -102,19 +107,20 @@ for x in range(len(census["COMMUNITY AREA NAME"])):
             if(wkt.loads(geom).contains(df2.loc[y, "points2"])):
                 count+=1
         listVal[index[0]]=count
-    print(count)
+    value+=1
+    print(index, ":", count)
+    
 
 allData["Business Count"]=listVal'''
 #allData.to_csv(r"C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj\AllDataFile.csv", index=False)
 
 
 
-
 #Housing
-
-'''for community in root.iter("community"):
+'''value=0
+for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
-    geom=root[0][index[0]].find("the_geom").text
+    geom=root[0][value].find("the_geom").text
     count=0
     countU=0
     if(index==[]):
@@ -123,13 +129,11 @@ allData["Business Count"]=listVal'''
         for y in range(len(housing["points"])):
             if(wkt.loads(geom).contains(housing.loc[y, "points"])):
                 count+=1
-                try:
-                    countU+=int(housing.loc[y,"Units"])
-                except:
-                    print(y)
+                countU+=int(housing.loc[y,"Units"])
         listVal[index[0]]=count
         listVal2[index[0]]=countU
-    print(count, countU)
+    value+=1
+    print(index, ":", count, countU)
 
 allData["Housing Count"]=listVal
 allData["Housing Count Units"]=listVal2'''
@@ -138,7 +142,8 @@ allData["Housing Count Units"]=listVal2'''
 
 #Hospitals
 
-'''pointsHos=hospitals["Address"]
+'''value=0
+pointsHos=hospitals["Address"]
 lats=[]
 longs=[]
 
@@ -157,7 +162,7 @@ hospitals["points"]=hospitals.apply(lambda col: Point(col.long, col.lat), axis=1
 
 for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
-    geom=root[0][index[0]].find("the_geom").text
+    geom=root[0][value].find("the_geom").text
     count=0
     if(index==[]):
         listVal.append(0)
@@ -166,17 +171,17 @@ for community in root.iter("community"):
             if(wkt.loads(geom).contains(hospitals.loc[y, "points"])):
                 count+=1
         listVal[index[0]]=count
-    print(count)
+    value+=1
 
 allData["Hospital Count"]=listVal'''
 #allData.to_csv(r"C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj\AllDataFile.csv", index=False)
 
 
 #Schools
-'''print(schools.loc[1, "SCH_TYPE"]=="Charter")
+'''value=0
 for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
-    geom=root[0][index[0]].find("the_geom").text
+    geom=root[0][value].find("the_geom").text
     chartE=0
     chartH=0
     distE=0
@@ -201,12 +206,15 @@ for community in root.iter("community"):
                     otherE+=1
                 else:
                     otherH+=1
+            if(index[0]==0):
+                print(schools.loc[y,"the_geom"])
     listCE[index[0]]=chartE
     listCH[index[0]]=chartH
     listDE[index[0]]=distE
     listDH[index[0]]=distH
     listOE[index[0]]=otherE
     listOH[index[0]]=otherH
+    value+=1
 
 allData["Charter School Elementary Count"]=listCE
 allData["Charter School High School Count"]=listCH
@@ -218,9 +226,10 @@ allData["ALOP/Safe School High School Count"]=listOH'''
 
 #Crime
 
+value=0
 for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
-    geom=root[0][index[0]].find("the_geom").text
+    geom=root[0][value].find("the_geom").text
     count=0
     if(index==[]):
         listVal.append(0)
@@ -229,7 +238,8 @@ for community in root.iter("community"):
             if(wkt.loads(geom).contains(crime.loc[y, "points"])):
                 count+=1
         listVal[index[0]]=count
-    print(count)
+    print(index, ":", count)
+    value+=1
 
 allData["Crime Count"]=listVal
 allData.to_csv(r"AllDataFile.csv", index=False)
