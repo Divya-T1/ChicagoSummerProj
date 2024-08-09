@@ -226,7 +226,7 @@ allData["ALOP/Safe School High School Count"]=listOH'''
 
 #Crime
 
-value=0
+'''value=0
 for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
     geom=root[0][value].find("the_geom").text
@@ -242,6 +242,26 @@ for community in root.iter("community"):
     value+=1
 
 allData["Crime Count"]=listVal
+allData.to_csv(r"AllDataFile.csv", index=False)'''
+
+#Grocery stores
+
+value=0
+for community in root.iter("community"):
+    index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
+    geom=root[0][value].find("the_geom").text
+    count=0
+    if(index==[]):
+        listVal.append(0)
+    else:
+        for y in range(len(df["points"])):
+            if(wkt.loads(geom).contains(df.loc[y, "points"])):
+                count+=1
+        listVal[index[0]]=count
+    print(index, ":", count)
+    value+=1
+    
+allData["Grocery Stores"]=listVal
 allData.to_csv(r"AllDataFile.csv", index=False)
 
 
