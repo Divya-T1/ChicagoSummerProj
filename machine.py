@@ -1,6 +1,6 @@
 from shapely.wkt import loads
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import NearestNeighbors
+from sklearn.ensemble import KNearestNeighbors
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
