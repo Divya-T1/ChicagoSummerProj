@@ -13,6 +13,8 @@ from shapely.errors import WKTReadingError
 from lxml import etree
 import xml.etree.ElementTree as ET
 
+print("hello")
+
 df = p.read_csv('GroceryStore.csv') 
 #put an r in front of the filepath so you don't have to do double backslashes
 #Ex: df2=p.read_csv(r'C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj\database\Business_License.csv')
