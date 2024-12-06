@@ -9,7 +9,7 @@ import geodatasets
 df = p.read_csv('GroceryStore.csv') 
 #put an r in front of the filepath so you don't have to do double backslashes
 #Ex: df2=p.read_csv(r'C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj\database\Business_License.csv')
-df2 = p.read_csv("database\\Business_License.csv")
+df2 = p.read_csv(r"C:\Users\venki\VSCode\Python\ChicagoSummerProject\ChicagoSummerProj")
 #use nrows to limit number of rows
 
 #chicago=p.read_csv("ChicagoMap.csv", usecols=["the_geom", "COMMUNITY"], nrows=1)

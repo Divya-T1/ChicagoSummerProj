@@ -23,6 +23,9 @@ df2 = p.read_csv("database\\Business_License.csv")
 
 housing = p.read_csv(r"database\Affordable_Rental_Housing_Developments_20240529.csv")
 
+pages = p.read_html('https://en.wikipedia.org/wiki/Community_areas_in_Chicago#cite_note-CMAP_Population-11')
+#print(pages)
+
 hospitals = p.read_csv(r"database\Public_Health_Services-_Chicago_Primary_Care_Community_Health_Centers.csv")
 
 schools=p.read_csv(r"database\CPS_School_Locations_SY1415_20240717.csv")
@@ -62,6 +65,7 @@ crime["points"] = crime.apply(lambda col: Point(col.LONGITUDE, col.LATITUDE), ax
 
 except WKTReadingError as e:
     print(x)'''
+
 
 listVal = []
 for x in range(len(census["COMMUNITY AREA NAME"])):
@@ -248,7 +252,7 @@ allData.to_csv(r"AllDataFile.csv", index=False)'''
 
 #Grocery stores
 
-value=0
+'''value=0
 for community in root.iter("community"):
     index=(census[census["COMMUNITY AREA NAME"] == string.capwords(community.text)].index.tolist())
     geom=root[0][value].find("the_geom").text
@@ -264,6 +268,24 @@ for community in root.iter("community"):
     value+=1
     
 allData["Grocery Stores"]=listVal
+allData.to_csv(r"AllDataFile.csv", index=False)'''
+
+allData["%_OF_HOUSING_CROWDED"] = census["PERCENT OF HOUSING CROWDED"]
+allData.to_csv(r"AllDataFile.csv", index=False)
+
+allData["%_OF_HOUSEHOLDS_BELOW_POVERTY"] = census["PERCENT HOUSEHOLDS BELOW POVERTY"]
+allData.to_csv(r"AllDataFile.csv", index=False)
+
+allData["%_AGED_16+_UNEMPLOYED"] = census["PERCENT AGED 16+ UNEMPLOYED"]
+allData.to_csv(r"AllDataFile.csv", index=False)
+
+allData["%_AGED_25+_WITHOUT_HIGH_SCHOOL_DIPLOMA"] = census["PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA"]
+allData.to_csv(r"AllDataFile.csv", index=False)
+
+allData["PERCENT_AGED_UNDER_18_OR_OVER_64"] = census["PERCENT AGED UNDER 18 OR OVER 64"]
+allData.to_csv(r"AllDataFile.csv", index=False)
+
+allData["PER_CAPITA_INCOME"] = census["PER CAPITA INCOME "]
 allData.to_csv(r"AllDataFile.csv", index=False)
 
 
